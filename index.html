@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR-VANILLA</title>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image-three.prod.js"></script>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="example-scanning-overlay" className="hidden">
+      <img id="scanning-ui" width="200" src="assets/logo_si.jpg" alt="" />
+      <p>Scanning...</p>
+  </div>
+  <a-scene
+  mindar-image="uiScanning: #example-scanning-overlay; imageTargetSrc: ./assets/newTargets.mind; maxTrack: 2; filterMinCF: 0.01; filterBeta: 15; missTolerance: 5"
+  vr-mode-ui="enabled: false"
+  device-orientation-permission-ui="enabled: false">
+        <a-camera
+            position="0 0 0"
+            look-controls="enabled: false"
+            cursor="fuse: false; rayOrigin: mouse;"
+            raycaster="far: 10000; objects: .clickable">
+        </a-camera>
+        <a-assets>
+            <video id="card" loop autoPlay src="./assets/vid.mp4" />
+            <img id="logo" src="assets/sinapsis.svg" />
+            <img id="instagram" className="UsLogo" src="assets/instagram.svg" />
+            <a-asset-item
+            id="raccoonModel"
+            src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/raccoon/scene.gltf"
+            ></a-asset-item>
+        </a-assets>
+        <a-entity mindar-image-target="targetIndex: 1">
+            <a-image
+              rotation="0 0 0"
+              src="#card"
+              position="0 0 0"
+              height="0.6"
+              width="1"
+            ></a-image>
+            <a-image
+              id="logo-si"
+              rotation="0 0 0"
+              class="clickable"
+              src="#logo"
+              position="-0.2 -0.42 0"
+              height="0.2"
+              width="0.2"
+            ></a-image>
+            <a-image
+              id="logo-ig"
+              rotation="0 0 0"
+              class="clickable"
+              src="#instagram"
+              position="0.2 -0.42 0"
+              height="0.2"
+              width="0.2"
+            ></a-image>
+          </a-entity>
+          <a-entity mindar-image-target="targetIndex: 0">
+            <a-gltf-model
+              rotation="90 0 0 "
+              position="0 0 0"
+              scale="0.05 0.05 0.05"
+              src="#raccoonModel"
+              animation-mixer
+            />
+            <a-image
+                id="logo-si"
+                rotation="0 0 0"
+                class="clickable"
+                src="#logo"
+                position="-0.2 -0.42 0"
+                height="0.2"
+                width="0.2"
+              ></a-image>
+              <a-image
+                id="logo-ig"
+                rotation="0 0 0"
+                class="clickable"
+                src="#instagram"
+                position="0.2 -0.42 0"
+                height="0.2"
+                width="0.2"
+              ></a-image>
+          </a-entity>
+    </a-scene>
+    <div class="butt-cont">
+      <button class="control-button" id="example-start-button">Start</button>
+      <button class="control-button" id="example-stop-button">Stop</button>
+      <button class="control-button" id="example-pause-button">Pause</button>
+      <button class="control-button" id="example-pause-keep-video-button">Pause (keep video)</button>
+      <button class="control-button" id="example-unpause-button">UnPause</button>
+    </div>
+    </html>
+    <script src="./index.js"></script>
+</body>
